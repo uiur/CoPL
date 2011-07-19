@@ -1,0 +1,250 @@
+S(Z) plus S(S(S(Z))) is S(S(S(S(Z)))) by P-Succ {
+  Z plus S(S(S(Z))) is S(S(S(Z))) by P-Zero {}
+}
+
+Z times S(S(Z)) is Z by T-Zero {}
+
+S(S(Z)) times Z is Z by T-Succ {
+  S(Z) times Z is Z by T-Succ {
+    Z times Z is Z by T-Zero {};
+    Z plus Z is Z by P-Zero {}
+  };
+  Z plus Z is Z by P-Zero {}
+}
+
+S(S(Z)) times S(Z) is S(S(Z)) by T-Succ {
+  S(Z) times S(Z) is S(Z) by T-Succ {
+    Z times S(Z) is Z by T-Zero {};
+    S(Z) plus Z is S(Z) by P-Succ {
+      Z plus Z is Z by P-Zero {}
+    }
+  };
+  S(Z) plus S(Z) is S(S(Z)) by P-Succ {
+    Z plus S(Z) is S(Z) by P-Zero {}
+  }
+} 
+// 8
+S(S(Z)) times S(S(Z)) is S(S(S(S(Z)))) by T-Succ {
+  S(Z) times S(S(Z)) is S(S(Z)) by T-Succ {
+    Z times S(S(Z)) is Z by T-Zero {};
+    S(S(Z)) plus Z is S(S(Z)) by P-Succ {
+      S(Z) plus Z is S(Z) by P-Succ {
+        Z plus Z is Z by P-Zero {}
+      }
+    }
+  };
+  S(S(Z)) plus S(S(Z)) is S(S(S(S(Z)))) by P-Succ {
+    S(Z) plus S(S(Z)) is S(S(S(Z))) by P-Succ {
+      Z plus S(S(Z)) is S(S(Z)) by P-Zero {}
+    }
+  }
+}
+
+// 9
+S(S(Z)) is less than S(S(S(Z))) by L-Succ {}
+
+// 10
+S(S(Z)) is less than S(S(S(Z))) by L-SuccSucc {
+  S(Z) is less than S(S(Z)) by L-SuccSucc {
+    Z is less than S(Z) by L-Zero {}
+  }
+}
+
+// 11
+S(S(Z)) is less than S(S(S(Z))) by L-Succ {}
+
+// 12
+S(S(Z)) is less than S(S(S(S(S(Z))))) by L-Trans {
+  S(S(Z)) is less than S(S(S(Z))) by L-Succ {};
+  S(S(S(Z))) is less than S(S(S(S(S(Z))))) by L-Trans {
+    S(S(S(Z))) is less than S(S(S(S(Z)))) by L-Succ {};
+    S(S(S(S(Z)))) is less than S(S(S(S(S(Z))))) by L-Succ {}
+  }
+}
+
+// 13
+S(S(Z)) is less than S(S(S(S(S(Z))))) by L-SuccSucc {
+  S(Z) is less than S(S(S(S(Z)))) by L-SuccSucc {
+    Z is less than S(S(S(Z))) by L-Zero {}
+  }
+}
+
+// 14
+S(S(Z)) is less than S(S(S(S(S(Z))))) by L-SuccR {
+  S(S(Z)) is less than S(S(S(S(Z)))) by L-SuccR {
+    S(S(Z)) is less than S(S(S(Z))) by L-Succ {}
+  }
+}
+
+// 15
+Z + S(S(Z)) evalto S(S(Z)) by E-Plus {
+  Z evalto Z by E-Const {};
+  S(S(Z)) evalto S(S(Z)) by E-Const {};
+  Z plus S(S(Z)) is S(S(Z)) by P-Zero {}
+}
+
+// 16
+S(S(Z)) + Z evalto S(S(Z)) by E-Plus {
+  S(S(Z)) evalto S(S(Z)) by E-Const {};
+  Z evalto Z by E-Const {};
+  S(S(Z)) plus Z is S(S(Z)) by P-Succ {
+    S(Z) plus Z is S(Z) by P-Succ {
+      Z plus Z is Z by P-Zero {}
+    }
+  }
+}
+
+// 17
+S(Z) + S(Z) + S(Z) evalto S(S(S(Z))) by E-Plus {
+  S(Z) + S(Z) evalto S(S(Z)) by E-Plus {
+    S(Z) evalto S(Z) by E-Const {};
+    S(Z) evalto S(Z) by E-Const {};
+    S(Z) plus S(Z) is S(S(Z)) by P-Succ {
+      Z plus S(Z) is S(Z) by P-Zero {}
+    }
+  };
+  S(Z) evalto S(Z) by E-Const {};
+  S(S(Z)) plus S(Z) is S(S(S(Z))) by P-Succ {
+    S(Z) plus S(Z) is S(S(Z)) by P-Succ {
+      Z plus S(Z) is S(Z) by P-Zero {};
+    }
+  }
+}
+
+// 18
+S(S(S(Z))) + S(S(Z)) * S(Z) evalto S(S(S(S(S(Z))))) by E-Plus {
+  S(S(S(Z))) evalto S(S(S(Z))) by E-Const {};
+  S(S(Z)) * S(Z) evalto S(S(Z)) by E-Times {
+    S(S(Z)) evalto S(S(Z)) by E-Const {};
+    S(Z) evalto S(Z) by E-Const {};
+    S(S(Z)) times S(Z) is S(S(Z)) by T-Succ {
+      S(Z) times S(Z) is S(Z) by T-Succ {
+        Z times S(Z) is Z by T-Zero {};
+        S(Z) plus Z is S(Z) by P-Succ {
+          Z plus Z is Z by P-Zero {}
+        }
+      };
+      S(Z) plus S(Z) is S(S(Z)) by P-Succ {
+        Z plus S(Z) is S(Z) by P-Zero {}
+      }
+    }
+  };
+  S(S(S(Z))) plus S(S(Z)) is S(S(S(S(S(Z))))) by P-Succ {
+    S(S(Z)) plus S(S(Z)) is S(S(S(S(Z)))) by P-Succ {
+      S(Z) plus S(S(Z)) is S(S(S(Z))) by P-Succ {
+        Z plus S(S(Z)) is S(S(Z)) by P-Zero {}
+      }
+    }
+  }
+}
+
+// 19
+(S(S(Z)) + S(S(Z))) * Z evalto Z by E-Times {
+  S(S(Z)) + S(S(Z)) evalto S(S(S(S(Z)))) by E-Plus {
+    S(S(Z)) evalto S(S(Z)) by E-Const {};
+    S(S(Z)) evalto S(S(Z)) by E-Const {};
+    S(S(Z)) plus S(S(Z)) is S(S(S(S(Z)))) by P-Succ {
+      S(Z) plus S(S(Z)) is S(S(S(Z))) by P-Succ {
+        Z plus S(S(Z)) is S(S(Z)) by P-Zero {}
+      }
+    }
+  };
+  Z evalto Z by E-Const {};
+  S(S(S(S(Z)))) times Z is Z by T-Succ {
+    S(S(S(Z))) times Z is Z by T-Succ {
+      S(S(Z)) times Z is Z by T-Succ {
+        S(Z) times Z is Z by T-Succ {
+          Z times Z is Z by T-Zero {};
+          Z plus Z is Z by P-Zero {}
+        };
+        Z plus Z is Z by P-Zero {}
+      };
+      Z plus Z is Z by P-Zero {}
+    };
+      Z plus Z is Z by P-Zero {}
+  }
+}
+
+// 20
+Z * (S(S(Z)) + S(S(Z))) evalto Z by E-Times {
+  Z evalto Z by E-Const {};
+  S(S(Z)) + S(S(Z)) evalto S(S(S(S(Z)))) by E-Plus {
+    S(S(Z)) evalto S(S(Z)) by E-Const {};
+    S(S(Z)) evalto S(S(Z)) by E-Const {};
+    S(S(Z)) plus S(S(Z)) is S(S(S(S(Z)))) by P-Succ {
+      S(Z) plus S(S(Z)) is S(S(S(Z))) by P-Succ {
+        Z plus S(S(Z)) is S(S(Z)) by P-Zero {}
+      }
+    }
+  };
+  Z times S(S(S(S(Z)))) is Z by T-Zero {}
+}
+
+// 21
+Z + S(S(Z)) -*-> S(S(Z)) by MR-One {
+  Z + S(S(Z)) ---> S(S(Z)) by R-Plus {
+    Z plus S(S(Z)) is S(S(Z)) by P-Zero {}
+  }
+}
+
+// 22
+S(Z) * S(Z) + S(Z) * S(Z) -d-> S(Z) + S(Z) * S(Z) by DR-PlusL {
+  S(Z) * S(Z) -d-> S(Z) by DR-Times {
+    S(Z) times S(Z) is S(Z) by T-Succ {
+      Z times S(Z) is Z by T-Zero {};
+      S(Z) plus Z is S(Z) by P-Succ {
+        Z plus Z is Z by P-Zero {}
+      };
+    }
+  }
+}
+
+// 23
+S(Z) * S(Z) + S(Z) * S(Z) ---> S(Z) * S(Z) + S(Z) by R-PlusR {
+  S(Z) * S(Z) ---> S(Z) by R-Times {
+    S(Z) times S(Z) is S(Z) by T-Succ {
+      Z times S(Z) is Z by T-Zero {};
+      S(Z) plus Z is S(Z) by P-Succ {
+        Z plus Z is Z by P-Zero {}
+      }
+    }
+  }
+}
+
+// 24
+S(Z) * S(Z) + S(Z) * S(Z) -*-> S(S(Z)) by MR-Multi {
+  S(Z) * S(Z) + S(Z) * S(Z) -*-> S(Z) + S(Z) by MR-Multi {
+    S(Z) * S(Z) + S(Z) * S(Z) -*-> S(Z) * S(Z) + S(Z) by MR-One {
+      S(Z) * S(Z) + S(Z) * S(Z) ---> S(Z) * S(Z) + S(Z) by R-PlusR {
+        S(Z) * S(Z) ---> S(Z) by R-Times {
+          S(Z) times S(Z) is S(Z) by T-Succ {
+            Z times S(Z) is Z by T-Zero {};
+            S(Z) plus Z is S(Z) by P-Succ {
+              Z plus Z is Z by P-Zero {}
+            } 
+          } 
+        } 
+      } 
+    };
+    S(Z) * S(Z) + S(Z) -*-> S(Z) + S(Z) by MR-One {
+      S(Z) * S(Z) + S(Z) ---> S(Z) + S(Z) by R-PlusL {
+        S(Z) * S(Z) ---> S(Z) by R-Times {
+          S(Z) times S(Z) is S(Z) by T-Succ {
+            Z times S(Z) is Z by T-Zero {};
+            S(Z) plus Z is S(Z) by P-Succ {
+              Z plus Z is Z by P-Zero {}
+            } 
+          }
+        }
+      }
+    }
+  };
+  S(Z) + S(Z) -*-> S(S(Z)) by MR-One {
+    S(Z) + S(Z) ---> S(S(Z)) by R-Plus {
+      S(Z) plus S(Z) is S(S(Z)) by P-Succ {
+        Z plus S(Z) is S(Z) by P-Zero {}
+      }
+    }
+  }
+}
+ 
